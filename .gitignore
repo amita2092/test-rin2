@@ -1,0 +1,12 @@
+#ignore vendor folder as each enviroment has it own vendor folder when run composer install
+/vendor
+
+# Ignore composer lock and package lock file
+/composer.lock
+/package-lock.json
+
+# Ignore environment configuration file
+.env
+
+# Ignore log files
+/storage/logs/*
