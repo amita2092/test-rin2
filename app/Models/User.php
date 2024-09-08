@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'notification_switch',
+        'phone'
     ];
 
     /**
@@ -42,4 +44,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // User can create many notifications
+    public function createdNotifications()
+    {
+        return $this->hasMany(Notification::class, 'created_by');
+    }
+
+    // User can receive many notifications
+    public function receivedNotifications()
+    {
+        return $this->belongsToMany(Notification::class, 'user_id');
+    }
+
+    
 }

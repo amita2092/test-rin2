@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){function n(){fetch("/notification/count",{method:"GET",headers:{"X-Requested-With":"XMLHttpRequest"}}).then(t=>t.json()).then(t=>{console.log("data",t),document.getElementById("notification-count").innerText=t.count}).catch(t=>{console.error("Error fetching notification count:",t)})}n(),setInterval(n,3e4)});
