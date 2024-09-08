@@ -16,6 +16,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
@@ -31,6 +32,7 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
+        
 
         $request->user()->save();
 
@@ -56,5 +58,15 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+     /**
+     * Display the user's notification settings form.
+     */
+    public function editUserNotificationSetting(Request $request): View
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
     }
 }

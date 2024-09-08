@@ -24,6 +24,20 @@
         </div>
 
         <div>
+            <x-input-label for="notification_switch" :value="__('Notification Switch')" />
+            <select id="notification_switch" name="notification_switch" class="mt-1 block w-full" required>
+                <option value="" disabled>Select</option>
+                <option value="1" {{ old('notification_switch', $user->notification_switch) == '1' ? 'selected' : '' }}>
+                    {{ __('Enabled') }}
+                </option>
+                <option value="0" {{ old('notification_switch', $user->notification_switch) == '0' ? 'selected' : '' }}>
+                    {{ __('Disabled') }}
+                </option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('notification_switch')" />
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -46,6 +60,13 @@
                 </div>
             @endif
         </div>
+
+        <div>
+            <x-input-label for="name" :value="__('Phone')" />
+            <x-text-input id="name" name="phone" type="number" class="mt-1 block w-full" :value="old('phone', $user->phone)" required autofocus autocomplete="phone" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+        </div>
+
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

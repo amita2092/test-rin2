@@ -16,41 +16,73 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('notification.index')" :active="request()->routeIs('notification.index')">
+                        {{ __('Notifications') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+            <!-- Settings and Notifications Dropdown -->
+<div class="hidden sm:flex sm:items-center sm:ms-6">
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
+<!-- Notifications Dropdown -->
+<x-dropdown align="right" width="48">
+    <x-slot name="trigger">
+        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+            <!-- Bell Icon -->
+            <x-nav-link :href="route('notification.show')" :active="request()->routeIs('notification.show')">
+                <p>You have <span id="notification-count">{{ $notificationCount ?? 0 }}</span> unread notifications.</p>
+            </x-nav-link>
+            <!-- <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v4.66a1 1 0 01-.293.707l-2 2A1 1 0 000 14v1a1 1 0 001 1h18a1 1 0 001-1v-1a1 1 0 00-.707-.707l-2-2a1 1 0 01-.293-.707V6a4 4 0 00-4-4zm1 11H9v1h2v-1zm-1 2a1 1 0 01-1-1h2a1 1 0 01-1 1z" clip-rule="evenodd"/>
+            </svg> -->
+        </button>
+    </x-slot>
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+    <x-slot name="content">
+        <!-- Display recent notifications -->
+       
+           
+    </x-slot>
+</x-dropdown>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+<!-- User Settings Dropdown -->
+<x-dropdown align="right" width="48">
+    <x-slot name="trigger">
+        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+            <div>{{ Auth::user()->name }}</div>
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
+            <div class="ms-1">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
             </div>
+        </button>
+    </x-slot>
+
+    <x-slot name="content">
+        <x-dropdown-link :href="route('profile.edit')">
+            {{ __('Profile') }}
+        </x-dropdown-link>
+
+        <!-- Authentication -->
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+            <x-dropdown-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                {{ __('Log Out') }}
+            </x-dropdown-link>
+        </form>
+    </x-slot>
+</x-dropdown>
+</div>
+
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
